@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мои заметки</string>
+    <string name="note_hint">Название</string>
+    <string name="note_name">Название заметки</string>
+    <string name="note_text_hint">Текст</string>
+    <string name="note_text">Содержимое заметки</string>
+</resources>
