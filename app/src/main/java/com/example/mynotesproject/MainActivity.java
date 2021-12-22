@@ -29,19 +29,24 @@ public class MainActivity extends AppCompatActivity {
         notes.add(new Note("Заметка3","укпв ва ва ва ав вп в","03.12.2021"));
 
 
-        NotesListFragment notesListFragment = new NotesListFragment().newInstance(notes);
+        MenuFragment menuFragment = new MenuFragment().newInstance(notes);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_Container,notesListFragment)
+                .replace(R.id.fragment_Container,menuFragment)
                 .commit();
+//        NotesListFragment notesListFragment = new NotesListFragment().newInstance(notes);
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragment_Container,notesListFragment)
+//                .commit();
 
-        if (Configuration.ORIENTATION_LANDSCAPE==getResources().getConfiguration().orientation){
-            NoteDetailFragment noteDetailFragment = new NoteDetailFragment().newInstance(notes.get(0));
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_Container_detail,noteDetailFragment)
-                    .commit();
-        }
+//        if (Configuration.ORIENTATION_LANDSCAPE==getResources().getConfiguration().orientation){
+//            NoteDetailFragment noteDetailFragment = new NoteDetailFragment().newInstance(notes.get(0));
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragment_Container_detail,noteDetailFragment)
+//                    .commit();
+//        }
 
 
     }

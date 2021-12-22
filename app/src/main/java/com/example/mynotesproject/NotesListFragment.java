@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link NotesListFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class NotesListFragment extends Fragment {
 
 //    private static final String ARG_PARAM1 = "s_Test";
@@ -25,6 +31,14 @@ public class NotesListFragment extends Fragment {
 //    private Note note;
 //    private String sTest;
     private ArrayList<Note> notes;
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param3 Parameter 1.
+     * @return A new instance of fragment NotesListFragment.
+     */
 
     public static NotesListFragment newInstance(ArrayList<Note> param3) {
         NotesListFragment fragment = new NotesListFragment();
@@ -39,6 +53,7 @@ public class NotesListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             notes = getArguments().getParcelableArrayList(ARG_PARAM3);
+            Log.d("mes","123");
         }
     }
 
