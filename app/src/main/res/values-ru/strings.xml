@@ -5,4 +5,10 @@
     <string name="note_name">Название заметки</string>
     <string name="note_text_hint">Текст</string>
     <string name="note_text">Содержимое заметки</string>
+    <string name="text_notes_title">Мои заметки</string>
+    <string name="txt_note">Заметки</string>
+    <string name="txt_calendar">Календарь</string>
+    <string name="txt_settings">Настройки</string>
+    <string name="txt_about">О программе</string>
+    <string name="txt_exit">Закрыть</string>
 </resources>
