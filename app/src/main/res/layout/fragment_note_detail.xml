@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".NoteDetailFragment"
-    android:background="@color/white">
+    android:background="@color/yelow"
+    android:focusable="true"
+    android:clickable="true">
 
     <EditText
         android:id="@+id/editTextDate"
@@ -23,12 +25,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextName"
             android:hint="@string/note_hint"
-            android:text="@string/note_name" />
+            android:text="@string/note_name"
+            android:background="@color/yelow"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <EditText
             android:id="@+id/editTextTextMultiLine"
@@ -38,6 +42,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:background="@color/yelow"
             android:text="@string/note_text"
             android:hint="@string/note_text_hint"/>
     </com.google.android.material.textfield.TextInputLayout>
