@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -99,6 +100,7 @@ public class NotesListFragment extends Fragment {
         transaction.addToBackStack("");
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
+        Toast.makeText(requireActivity(), note.getN_name(), Toast.LENGTH_LONG).show();
     }
 
     //Показываем фрагмент с детализацией заметки рядом со списком (для ландшафтной ориентации)
