@@ -59,18 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        switch (id) {
-//            case R.id.menu_note:
-//                showNotes();
-//                return true;
-//            case R.id.menu_calendar:
-//                showCalendar();
-//                return true;
-//            case R.id.menu_close:
-//                closeProgram();
-//                return true;
-//        }
         MenuSelect(item);
         return super.onOptionsItemSelected(item);
     }

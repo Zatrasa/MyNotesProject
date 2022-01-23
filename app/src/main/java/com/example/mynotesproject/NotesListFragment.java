@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +55,6 @@ public class NotesListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             notes = getArguments().getParcelableArrayList(ARG_PARAM3);
-            Log.d("mes","123");
         }
     }
 
@@ -62,13 +62,32 @@ public class NotesListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes_list, container, false);
+        View view= inflater.inflate(R.layout.fragment_notes_list, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_my);
+        //Инициализация recV
+        recyclerView.setHasFixedSize(true);
+
+        NoteListAdapter adapter = new NoteListAdapter(notes);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new NoteListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+//                showNoteDetail(notes.get(position));
+                if(Configuration.ORIENTATION_LANDSCAPE==getResources().getConfiguration().orientation){
+                    showNoteDetailLand(notes.get(position));
+                }
+                else{
+                    showNoteDetail(notes.get(position));}
+            }
+        });
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        showNotes(view);
+       // showNotes(view);
     }
     //Создаем список заметок на фрагменте
     private void showNotes(View view) {
