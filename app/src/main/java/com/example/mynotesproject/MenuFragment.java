@@ -17,6 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MenuFragment extends Fragment {
 
@@ -55,16 +58,36 @@ public class MenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button button_note = view.findViewById(R.id.button_note);
-        button_note.setOnClickListener(v->{
-            NotesListFragment notesListFragment = NotesListFragment.newInstance(m_notes);
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            ((FragmentTransaction) transaction).add(R.id.fragment_Container, notesListFragment);
-            transaction.addToBackStack("");
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            transaction.commit();
+        initButtonNote(view);
+        initButtonCalendar(view);
+        initButtonSettings(view);
+        initButtonAbout(view);
+        initButtonExit(view);
+    }
+
+    private void initButtonAbout(@NonNull View view) {
+        Button button_about = view.findViewById(R.id.button_about);
+        button_about.setOnClickListener(v->{
+            Snackbar.make(view, "Under construction", Snackbar.LENGTH_LONG).show();
         });
+    }
+    private void initButtonSettings(@NonNull View view) {
+        Button button_settings = view.findViewById(R.id.button_settings);
+        button_settings.setOnClickListener(v->{
+            Snackbar.make(view, "Under construction", Snackbar.LENGTH_LONG).show();
+        });
+    }
+
+
+    private void initButtonExit(@NonNull View view) {
+        Button button_exit = view.findViewById(R.id.button_exit);
+        button_exit.setOnClickListener(v->{
+            MainActivity ma = (MainActivity)this.getActivity();
+            ma.closeProgram();
+        });
+    }
+
+    private void initButtonCalendar(@NonNull View view) {
         Button button_calenadr = view.findViewById(R.id.button_calendar);
         button_calenadr.setOnClickListener(v->{
             CalendarFragment calendarFragment = new CalendarFragment();
@@ -74,6 +97,23 @@ public class MenuFragment extends Fragment {
             transaction.addToBackStack("");
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             transaction.commit();
+            Toast.makeText(requireActivity(),
+                    "Calendar",
+                    Toast.LENGTH_LONG).show();
+        });
+    }
+
+    private void initButtonNote(@NonNull View view) {
+        Button button_note = view.findViewById(R.id.button_note);
+        button_note.setOnClickListener(v->{
+            NotesListFragment notesListFragment = NotesListFragment.newInstance(m_notes);
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            ((FragmentTransaction) transaction).add(R.id.fragment_Container, notesListFragment);
+            transaction.addToBackStack("");
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            transaction.commit();
+
         });
     }
 }
