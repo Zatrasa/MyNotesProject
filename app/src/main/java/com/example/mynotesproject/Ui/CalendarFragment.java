@@ -1,4 +1,4 @@
-package com.example.mynotesproject;
+package com.example.mynotesproject.Ui;
 
 import android.os.Bundle;
 
@@ -8,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mynotesproject.R;
+
 
 public class CalendarFragment extends Fragment {
-
-    public CalendarFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

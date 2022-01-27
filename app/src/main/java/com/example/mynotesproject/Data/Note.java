@@ -1,9 +1,7 @@
-package com.example.mynotesproject;
+package com.example.mynotesproject.Data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.Date;
 
 public class Note implements Parcelable {
 
@@ -65,4 +63,5 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
+
 }

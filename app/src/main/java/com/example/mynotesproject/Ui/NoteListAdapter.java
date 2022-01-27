@@ -1,38 +1,29 @@
-package com.example.mynotesproject;
+package com.example.mynotesproject.Ui;
 
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
+import com.example.mynotesproject.Data.DataSourse;
+import com.example.mynotesproject.R;
+import com.example.mynotesproject.Data.Note;
+
 import java.util.ArrayList;
 
 public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHolder>{
 
-    //private NoteListAdapter.OnItemClickListener itemClickListener;
     private OnItemClickListener itemClickListener;
     private int menuPosition;
-    private ArrayList<Note> dataSource;
+   // private ArrayList<Note> dataSource;
+    private DataSourse dataSource;
 
-    public NoteListAdapter(ArrayList<Note> notes){
-        this.dataSource = notes;
+    public NoteListAdapter(DataSourse dataSource){
+        this.dataSource = dataSource;
     }
-
-//    public void setDataSource(NoteSource dataSource){
-//        this.dataSource = dataSource;
-//    }
 
     @NonNull
     @Override
@@ -43,7 +34,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull NoteListAdapter.ViewHolder holder, int position) {
-        holder.bind(dataSource.get(position));
+        holder.bind(dataSource.getItem(position));
     }
 
     @Override
@@ -82,8 +73,6 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 
         }
         public void bind(Note note){
-//            title.setText(cardData.getTitle());
-//            description.setText(cardData.getDescription());
             title.setText(note.getN_name());
             description.setText(note.getN_text());
         }
