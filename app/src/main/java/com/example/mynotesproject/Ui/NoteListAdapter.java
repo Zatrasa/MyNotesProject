@@ -1,28 +1,34 @@
 package com.example.mynotesproject.Ui;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynotesproject.Data.DataSourse;
 import com.example.mynotesproject.R;
 import com.example.mynotesproject.Data.Note;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHolder>{
 
     private OnItemClickListener itemClickListener;
     private int menuPosition;
-   // private ArrayList<Note> dataSource;
     private DataSourse dataSource;
+    private Fragment fragment;
+    private int itemSelected;
 
-    public NoteListAdapter(DataSourse dataSource){
+    public NoteListAdapter(DataSourse dataSource,Fragment fragment){
         this.dataSource = dataSource;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -55,19 +61,31 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 
         private TextView title;
         private TextView description;
+        private TextView date;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.itemText);
             description = itemView.findViewById(R.id.itemCommentText);
-
+            date = itemView.findViewById(R.id.date);
+            fragment.registerForContextMenu(itemView);
             title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (itemClickListener != null){
                         itemClickListener.onItemClick(view, getAdapterPosition());
+                        itemSelected = getLayoutPosition();
                     }
+                }
+            });
+            title.setOnLongClickListener(new View.OnLongClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public boolean onLongClick(View v) {
+                    itemView.showContextMenu(10,10);
+                    itemSelected = getLayoutPosition();
+                    return true;
                 }
             });
 
@@ -75,6 +93,11 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
         public void bind(Note note){
             title.setText(note.getN_name());
             description.setText(note.getN_text());
+            date.setText(new SimpleDateFormat("dd-MM-yy").format(note.getD_date()));
         }
+    }
+
+    public int getItemSelected() {
+        return itemSelected;
     }
 }

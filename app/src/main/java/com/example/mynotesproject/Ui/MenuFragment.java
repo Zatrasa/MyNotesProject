@@ -92,4 +92,6 @@ public class MenuFragment extends Fragment {
             navigation.addFragment(new NotesListFragment(),R.id.fragment_Container,true);
         });
     }
+
+
 }

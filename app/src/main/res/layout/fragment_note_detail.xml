@@ -9,13 +9,6 @@
     android:focusable="true"
     android:clickable="true">
 
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,7 +24,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
 
         <EditText
@@ -45,5 +38,16 @@
             android:background="@color/yelow"
             android:text="@string/note_text"
             android:hint="@string/note_text_hint"/>
+
+
+
     </com.google.android.material.textfield.TextInputLayout>
+    <DatePicker
+        android:id="@+id/inputDate"
+        android:layout_width="match_parent"
+        android:layout_height="378dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 </LinearLayout>

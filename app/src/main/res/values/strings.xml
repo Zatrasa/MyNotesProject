@@ -12,4 +12,7 @@
     <string name="txt_exit">Close</string>
     <string name="navigation_drawer_open" translatable="false">open</string>
     <string name="navigation_drawer_close" translatable="false">close</string>
+    <string name="item_menu_add">Add</string>
+    <string name="item_menu_delete">Delete</string>
+    <string name="item_menu_update">Edit</string>
 </resources>

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.mynotesproject.Data.DataSourse;
 import com.example.mynotesproject.Data.Note;
 import com.example.mynotesproject.Data.NotesList;
+import com.example.mynotesproject.Observe.Publisher;
 import com.example.mynotesproject.Ui.CalendarFragment;
 import com.example.mynotesproject.Ui.MenuFragment;
 import com.example.mynotesproject.Ui.NotesListFragment;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public Navigation navigation;
+    public Publisher publisher = new Publisher();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
