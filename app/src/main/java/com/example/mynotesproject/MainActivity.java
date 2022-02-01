@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,19 +28,22 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-    public Navigation navigation;
+
+    public Navigation navigation= new Navigation(getSupportFragmentManager());
     public Publisher publisher = new Publisher();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        navigation = new Navigation(getSupportFragmentManager());
+       // navigation = new Navigation(getSupportFragmentManager());
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         initDrawer(toolbar);
-        navigation.addFragment(new MenuFragment(),R.id.fragment_Container,false);
+        if (savedInstanceState == null) {
+            navigation.addFragment(new MenuFragment(), R.id.fragment_Container, false);
+        }
     }
 
     @Override
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean MenuSelect(@NonNull MenuItem item) {
-        int id = item.getItemId();
+        final int id = item.getItemId();
         switch (id) {
             case R.id.menu_note:
                 showNotes();

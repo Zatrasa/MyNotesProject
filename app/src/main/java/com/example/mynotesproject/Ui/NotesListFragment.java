@@ -1,6 +1,9 @@
 package com.example.mynotesproject.Ui;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -28,7 +31,11 @@ import com.example.mynotesproject.Observe.Observer;
 import com.example.mynotesproject.Observe.Publisher;
 import com.example.mynotesproject.R;
 import com.example.mynotesproject.Data.Note;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class NotesListFragment extends Fragment {
@@ -37,6 +44,8 @@ public class NotesListFragment extends Fragment {
     Navigation navigation;
     private Publisher publisher;
     private NoteListAdapter adapter;
+    private SharedPreferences sharedPref = null;
+    public static final String KEY = "key";
 
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
@@ -47,7 +56,8 @@ public class NotesListFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        final int id=item.getItemId();
+        switch (id){
             case R.id.action_add:
                 addItem();
                 return true;
@@ -83,6 +93,7 @@ public class NotesListFragment extends Fragment {
         dataSourse = new NotesList();
         dataSourse.init();
 
+
     }
 
     @Override
@@ -91,6 +102,7 @@ public class NotesListFragment extends Fragment {
         MainActivity activity = (MainActivity) context;
         navigation = activity.navigation;
         publisher = activity.publisher;
+        sharedPref = activity.getSharedPreferences("My Preferences", MODE_PRIVATE);
     }
 
     @Override
@@ -98,6 +110,20 @@ public class NotesListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_notes_list, container, false);
         setHasOptionsMenu(true);
+
+
+        String savedNotes = sharedPref.getString(KEY, null);
+        if (savedNotes == null || savedNotes.isEmpty()) {
+            Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                Type type = new TypeToken<NotesList>() {
+                }.getType();
+                dataSourse = new GsonBuilder().create().fromJson(savedNotes, type);
+            } catch (JsonSyntaxException e) {
+                Toast.makeText(requireActivity(), "Ошибка трансформации", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_my);
         recyclerView.setHasFixedSize(true);
@@ -159,6 +185,8 @@ public class NotesListFragment extends Fragment {
     public void onDetach() {
         navigation = null;
         publisher = null;
+        String jsonNotes = new GsonBuilder().create().toJson(dataSourse);
+        sharedPref.edit().putString(KEY, jsonNotes).apply();
         super.onDetach();
     }
 }
